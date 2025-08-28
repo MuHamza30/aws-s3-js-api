@@ -13,7 +13,7 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```ts
-import { Client, Environment } from 'aws-s3-api';
+import { Client, Environment } from 'apimatic-aws-s3-sdk';
 
 const client = new Client({
   timeout: 0,

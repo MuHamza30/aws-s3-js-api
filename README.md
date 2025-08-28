@@ -6,10 +6,10 @@
 Run the following command from your project directory to install the package from npm:
 
 ```bash
-npm install aws-s3-api@1.0.0
+npm install apimatic-aws-s3-sdk@1.0.0
 ```
 
-For additional package details, see the [Npm page for the aws-s3-api@1.0.0 npm](https://www.npmjs.com/package/aws-s3-api/v/1.0.0).
+For additional package details, see the [Npm page for the apimatic-aws-s3-sdk@1.0.0 npm](https://www.npmjs.com/package/apimatic-aws-s3-sdk/v/1.0.0).
 
 ## Test the SDK
 
@@ -43,7 +43,7 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```ts
-import { Client, Environment } from 'aws-s3-api';
+import { Client, Environment } from 'apimatic-aws-s3-sdk';
 
 const client = new Client({
   timeout: 0,

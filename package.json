@@ -29,7 +29,7 @@
     "trailingComma": "es5",
     "quoteProps": "preserve"
   },
-  "name": "aws-s3-api",
+  "name": "apimatic-aws-s3-sdk",
   "description": "AWS S3 (Simple Storage Service) is a scalable object storage service for securely storing, retrieving, and managing data such as files, backups, and media.",
   "author": {
     "name": "Hamza Shahzad",
