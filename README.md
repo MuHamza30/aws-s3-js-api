@@ -3,29 +3,28 @@
 
 ## Install the Package
 
-Run the following command from your project directory to install the package from npm:
+Install the SDK by adding the following dependency in your project's pom.xml file:
 
-```bash
-npm install apimatic-aws-s3-sdk@1.0.0
+```xml
+<dependency>
+  <groupId>io.sdks</groupId>
+  <artifactId>apimatic-aws-s3-api</artifactId>
+  <version>1.0.0</version>
+</dependency>
 ```
 
-For additional package details, see the [Npm page for the apimatic-aws-s3-sdk@1.0.0 npm](https://www.npmjs.com/package/apimatic-aws-s3-sdk/v/1.0.0).
+You can also view the package at:
+https://central.sonatype.com/artifact/io.sdks/apimatic-aws-s3-api/1.0.0
 
 ## Test the SDK
 
-To validate the functionality of this SDK, you can execute all tests located in the `test` directory. This SDK utilizes `Jest` as both the testing framework and test runner.
+The generated code and the server can be tested using automatically generated test cases.
+JUnit is used as the testing framework and test runner.
 
-To run the tests, navigate to the root directory of the SDK and execute the following command:
+In Eclipse, for running the tests do the following:
 
-```bash
-npm run test
-```
-
-Or you can also run tests with coverage report:
-
-```bash
-npm run test:coverage
-```
+1. Select the project AWSS3Lib from the package explorer.
+2. Select `Run -> Run as -> JUnit Test` or use `Alt + Shift + X` followed by `T` to run the Tests.
 
 ## Initialize the API Client
 
@@ -35,20 +34,28 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| environment | `Environment` | The API environment. <br> **Default: `Environment.Production`** |
-| timeout | `number` | Timeout for API calls.<br>*Default*: `0` |
-| httpClientOptions | [`Partial<HttpClientOptions>`](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-client-options.md) | Stable configurable http client options. |
-| unstableHttpClientOptions | `any` | Unstable configurable http client options. |
+| environment | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
+| httpClientConfig | [`Consumer<HttpClientConfiguration.Builder>`](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-client-configuration-builder.md) | Set up Http Client Configuration instance. |
 
 The API client can be initialized as follows:
 
-```ts
-import { Client, Environment } from 'apimatic-aws-s3-sdk';
+```java
+import com.amazonaws.s3.AWSS3Client;
+import com.amazonaws.s3.Environment;
+import com.amazonaws.s3.exceptions.ApiException;
+import java.io.IOException;
+import javax.xml.bind.JAXBException;
 
-const client = new Client({
-  timeout: 0,
-  environment: Environment.Production,
-});
+public class Program {
+    public static void main(String[] args) {
+        AWSS3Client client = new AWSS3Client.Builder()
+            .httpClientConfig(configBuilder -> configBuilder
+                    .timeout(0))
+            .environment(Environment.PRODUCTION)
+            .build();
+
+    }
+}
 ```
 
 ## List of APIs
@@ -85,16 +92,25 @@ const client = new Client({
 
 ### Configuration
 
-* [HttpClientOptions](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-client-options.md)
-* [RetryConfiguration](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/retry-configuration.md)
-* [ProxySettings](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/proxy-settings.md)
+* [Configuration Interface](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/configuration-interface.md)
+* [HttpClientConfiguration](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-client-configuration.md)
+* [HttpClientConfiguration.Builder](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-client-configuration-builder.md)
+* [HttpProxyConfiguration](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-proxy-configuration.md)
+* [HttpProxyConfiguration.Builder](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-proxy-configuration-builder.md)
 
 ### HTTP
 
+* [Headers](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/headers.md)
+* [HttpCallback Interface](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-callback-interface.md)
+* [HttpContext](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-context.md)
+* [HttpBodyRequest](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-body-request.md)
 * [HttpRequest](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-request.md)
+* [HttpResponse](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-response.md)
+* [HttpStringResponse](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/http-string-response.md)
 
 ### Utilities
 
-* [ApiResponse](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/api-response.md)
-* [ApiError](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/api-error.md)
+* [ApiException](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/api-exception.md)
+* [ApiHelper](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/api-helper.md)
+* [FileWrapper](https://www.github.com/MuHamza30/aws-s3-js-api/tree/1.0.0/doc/file-wrapper.md)
 

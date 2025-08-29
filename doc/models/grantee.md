@@ -7,11 +7,11 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `type` | `string \| undefined` | Optional | - |
-| `iD` | `string` | Required | - |
-| `displayName` | `string` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Type` | `String` | Optional | - | String getType() | setType(String type) |
+| `ID` | `String` | Required | - | String getID() | setID(String iD) |
+| `DisplayName` | `String` | Required | - | String getDisplayName() | setDisplayName(String displayName) |
 
 ## Example (as XML)
 

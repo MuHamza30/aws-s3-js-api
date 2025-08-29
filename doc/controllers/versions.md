@@ -1,7 +1,7 @@
 # Versions
 
-```ts
-const versionsController = new VersionsController(client);
+```java
+VersionsController versionsController = client.getVersionsController();
 ```
 
 ## Class Name
@@ -13,80 +13,57 @@ const versionsController = new VersionsController(client);
 
 Returns metadata about all of the versions of objects in a bucket. You can also use request parameters as selection criteria to return metadata about a subset of all the object versions.
 
-```ts
-async objectVersions(
-  versions: string,
-  delimiter: string,
-  encodingType: string,
-  keyMarker: string,
-  maxKeys: string,
-  prefix: string,
-  versionIdMarker: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListVersionsResult>>
+```java
+CompletableFuture<ListVersionsResult> objectVersionsAsync(
+    final String versions,
+    final String delimiter,
+    final String encodingType,
+    final String keyMarker,
+    final String maxKeys,
+    final String prefix,
+    final String versionIdMarker,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `versions` | `string` | Query, Required | - |
-| `delimiter` | `string` | Query, Required | - |
-| `encodingType` | `string` | Query, Required | - |
-| `keyMarker` | `string` | Query, Required | - |
-| `maxKeys` | `string` | Query, Required | - |
-| `prefix` | `string` | Query, Required | - |
-| `versionIdMarker` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `versions` | `String` | Query, Required | - |
+| `delimiter` | `String` | Query, Required | - |
+| `encodingType` | `String` | Query, Required | - |
+| `keyMarker` | `String` | Query, Required | - |
+| `maxKeys` | `String` | Query, Required | - |
+| `prefix` | `String` | Query, Required | - |
+| `versionIdMarker` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListVersionsResult`](../../doc/models/list-versions-result.md).
+[`ListVersionsResult`](../../doc/models/list-versions-result.md)
 
 ## Example Usage
 
-```ts
-const versions = 'versions0';
+```java
+String versions = "versions0";
+String delimiter = "{{Delimiter}}";
+String encodingType = "{{EncodingType}}";
+String keyMarker = "{{KeyMarker}}";
+String maxKeys = "{{MaxKeys}}";
+String prefix = "{{Prefix}}";
+String versionIdMarker = "{{VersionIdMarker}}";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const delimiter = '{{Delimiter}}';
-
-const encodingType = '{{EncodingType}}';
-
-const keyMarker = '{{KeyMarker}}';
-
-const maxKeys = '{{MaxKeys}}';
-
-const prefix = '{{Prefix}}';
-
-const versionIdMarker = '{{VersionIdMarker}}';
-
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await versionsController.objectVersions(
-    versions,
-    delimiter,
-    encodingType,
-    keyMarker,
-    maxKeys,
-    prefix,
-    versionIdMarker,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+versionsController.objectVersionsAsync(versions, delimiter, encodingType, keyMarker, maxKeys, prefix, versionIdMarker, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

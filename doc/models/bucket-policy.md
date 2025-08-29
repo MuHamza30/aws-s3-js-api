@@ -7,11 +7,11 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `version` | `string` | Required | - |
-| `id` | `string` | Required | - |
-| `statement` | [`Statement[]`](../../doc/models/statement.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Version` | `String` | Required | - | String getVersion() | setVersion(String version) |
+| `Id` | `String` | Required | - | String getId() | setId(String id) |
+| `Statement` | [`List<Statement>`](../../doc/models/statement.md) | Required | - | List<Statement> getStatement() | setStatement(List<Statement> statement) |
 
 ## Example (as JSON)
 

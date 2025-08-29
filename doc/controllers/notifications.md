@@ -1,7 +1,7 @@
 # Notifications
 
-```ts
-const notificationsController = new NotificationsController(client);
+```java
+NotificationsController notificationsController = client.getNotificationsController();
 ```
 
 ## Class Name
@@ -18,51 +18,39 @@ const notificationsController = new NotificationsController(client);
 
 Returns the notification configuration of a bucket.
 
-```ts
-async bucketNotificationCOnfiguration(
-  notification: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketNotificationCOnfigurationAsync(
+    final String notification,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `notification` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `notification` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const notification = 'notification2';
+```java
+String notification = "notification2";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await notificationsController.bucketNotificationCOnfiguration(
-    notification,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+notificationsController.bucketNotificationCOnfigurationAsync(notification, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -70,50 +58,38 @@ try {
 
 Enables notifications of specified events for a bucket. For more information about event notifications, see Configuring Event Notifications.
 
-```ts
-async bucketNotificationCOnfiguration1(
-  notification: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketNotificationCOnfiguration1Async(
+    final String notification,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `notification` | `string` | Query, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `notification` | `String` | Query, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const notification = 'notification2';
+```java
+String notification = "notification2";
+String body = "<NotificationConfiguration>\n  <CloudFunctionConfiguration>\n    <Id>ObjectCreatedEvents</Id>\n    <CloudFunction>arn:aws:lambda:us-west-2:35667example:function:CreateThumbnail</CloudFunction>\n    <Event>s3:ObjectCreated:*</Event>\n  </CloudFunctionConfiguration>\n</NotificationConfiguration>";
+String bucket = "bucket2";
 
-const body = '<NotificationConfiguration>\n  <CloudFunctionConfiguration>\n    <Id>ObjectCreatedEvents</Id>\n    <CloudFunction>arn:aws:lambda:us-west-2:35667example:function:CreateThumbnail</CloudFunction>\n    <Event>s3:ObjectCreated:*</Event>\n  </CloudFunctionConfiguration>\n</NotificationConfiguration>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await notificationsController.bucketNotificationCOnfiguration1(
-    notification,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+notificationsController.bucketNotificationCOnfiguration1Async(notification, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

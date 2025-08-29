@@ -7,15 +7,15 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `name` | `string` | Required | - |
-| `prefix` | `string` | Required | - |
-| `keyMarker` | `string` | Required | - |
-| `versionIdMarker` | `string` | Required | - |
-| `maxKeys` | `number` | Required | - |
-| `isTruncated` | `boolean` | Required | - |
-| `version` | [`Version[]`](../../doc/models/version.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Name` | `String` | Required | - | String getName() | setName(String name) |
+| `Prefix` | `String` | Required | - | String getPrefix() | setPrefix(String prefix) |
+| `KeyMarker` | `String` | Required | - | String getKeyMarker() | setKeyMarker(String keyMarker) |
+| `VersionIdMarker` | `String` | Required | - | String getVersionIdMarker() | setVersionIdMarker(String versionIdMarker) |
+| `MaxKeys` | `int` | Required | - | int getMaxKeys() | setMaxKeys(int maxKeys) |
+| `IsTruncated` | `boolean` | Required | - | boolean getIsTruncated() | setIsTruncated(boolean isTruncated) |
+| `Version` | [`List<Version>`](../../doc/models/version.md) | Required | - | List<Version> getVersion() | setVersion(List<Version> version) |
 
 ## Example (as XML)
 

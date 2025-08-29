@@ -1,7 +1,7 @@
 # Location
 
-```ts
-const locationController = new LocationController(client);
+```java
+LocationController locationController = client.getLocationController();
 ```
 
 ## Class Name
@@ -13,50 +13,39 @@ const locationController = new LocationController(client);
 
 Returns the region the bucket resides in. You set the bucket's region using the LocationConstraint request parameter in a CreateBucket request. For more information, see CreateBucket.
 
-```ts
-async bucketLocation(
-  location: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> bucketLocationAsync(
+    final String location,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `location` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const location = 'location4';
+```java
+String location = "location4";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await locationController.bucketLocation(
-    location,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+locationController.bucketLocationAsync(location, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

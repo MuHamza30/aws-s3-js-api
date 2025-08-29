@@ -1,7 +1,7 @@
 # Replication
 
-```ts
-const replicationController = new ReplicationController(client);
+```java
+ReplicationController replicationController = client.getReplicationController();
 ```
 
 ## Class Name
@@ -19,119 +19,91 @@ const replicationController = new ReplicationController(client);
 
 Returns the replication configuration of a bucket.
 
-```ts
-async bucketReplication(
-  replication: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketReplicationAsync(
+    final String replication,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `replication` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `replication` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const replication = 'replication0';
+```java
+String replication = "replication0";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await replicationController.bucketReplication(
-    replication,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+replicationController.bucketReplicationAsync(replication, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 404 | Not Found | [`CustomError`](../../doc/models/custom-error.md) |
+| 404 | Not Found | [`ErrorException`](../../doc/models/error-exception.md) |
 
 
 # Bucket Replication 1
 
 Creates a replication configuration or replaces an existing one.
 
-```ts
-async bucketReplication1(
-  replication: string,
-  contentMD5: string,
-  xAmzBucketObjectLockToken: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketReplication1Async(
+    final String replication,
+    final String contentMD5,
+    final String xAmzBucketObjectLockToken,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `replication` | `string` | Query, Required | - |
-| `contentMD5` | `string` | Header, Required | - |
-| `xAmzBucketObjectLockToken` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `replication` | `String` | Query, Required | - |
+| `contentMD5` | `String` | Header, Required | - |
+| `xAmzBucketObjectLockToken` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const replication = 'replication0';
+```java
+String replication = "replication0";
+String contentMD5 = "{{contentMD5}}";
+String xAmzBucketObjectLockToken = "Token";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ReplicationConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Role>string</Role>\n   <Rule>\n      <DeleteMarkerReplication>\n         <Status>string</Status>\n      </DeleteMarkerReplication>\n      <Destination>\n         <AccessControlTranslation>\n            <Owner>string</Owner>\n         </AccessControlTranslation>\n         <Account>string</Account>\n         <Bucket>string</Bucket>\n         <EncryptionConfiguration>\n            <ReplicaKmsKeyID>string</ReplicaKmsKeyID>\n         </EncryptionConfiguration>\n         <Metrics>\n            <EventThreshold>\n               <Hours>integer</Hours>\n               <Minutes>integer</Minutes>\n            </EventThreshold>\n            <Status>string</Status>\n         </Metrics>\n         <ReplicationTime>\n            <Status>string</Status>\n            <Time>\n               <Hours>integer</Hours>\n               <Minutes>integer</Minutes>\n            </Time>\n         </ReplicationTime>\n         <StorageClass>string</StorageClass>\n      </Destination>\n      <ExistingObjectReplication>\n         <Status>string</Status>\n      </ExistingObjectReplication>\n      <Filter>\n         <And>\n            <Prefix>string</Prefix>\n            <Tag>\n               <Key>string</Key>\n               <Value>string</Value>\n            </Tag>\n         </And>\n         <Prefix>string</Prefix>\n         <Tag>\n            <Key>string</Key>\n            <Value>string</Value>\n         </Tag>\n      </Filter>\n      <ID>string</ID>\n      <Prefix>string</Prefix>\n      <Priority>integer</Priority>\n      <SourceSelectionCriteria>\n         <SseKmsEncryptedObjects>\n            <Status>string</Status>\n         </SseKmsEncryptedObjects>\n      </SourceSelectionCriteria>\n      <Status>string</Status>\n   </Rule>\n</ReplicationConfiguration>";
+String bucket = "bucket2";
 
-const contentMD5 = '{{contentMD5}}';
-
-const xAmzBucketObjectLockToken = 'Token';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<ReplicationConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Role>string</Role>\n   <Rule>\n      <DeleteMarkerReplication>\n         <Status>string</Status>\n      </DeleteMarkerReplication>\n      <Destination>\n         <AccessControlTranslation>\n            <Owner>string</Owner>\n         </AccessControlTranslation>\n         <Account>string</Account>\n         <Bucket>string</Bucket>\n         <EncryptionConfiguration>\n            <ReplicaKmsKeyID>string</ReplicaKmsKeyID>\n         </EncryptionConfiguration>\n         <Metrics>\n            <EventThreshold>\n               <Hours>integer</Hours>\n               <Minutes>integer</Minutes>\n            </EventThreshold>\n            <Status>string</Status>\n         </Metrics>\n         <ReplicationTime>\n            <Status>string</Status>\n            <Time>\n               <Hours>integer</Hours>\n               <Minutes>integer</Minutes>\n            </Time>\n         </ReplicationTime>\n         <StorageClass>string</StorageClass>\n      </Destination>\n      <ExistingObjectReplication>\n         <Status>string</Status>\n      </ExistingObjectReplication>\n      <Filter>\n         <And>\n            <Prefix>string</Prefix>\n            <Tag>\n               <Key>string</Key>\n               <Value>string</Value>\n            </Tag>\n         </And>\n         <Prefix>string</Prefix>\n         <Tag>\n            <Key>string</Key>\n            <Value>string</Value>\n         </Tag>\n      </Filter>\n      <ID>string</ID>\n      <Prefix>string</Prefix>\n      <Priority>integer</Priority>\n      <SourceSelectionCriteria>\n         <SseKmsEncryptedObjects>\n            <Status>string</Status>\n         </SseKmsEncryptedObjects>\n      </SourceSelectionCriteria>\n      <Status>string</Status>\n   </Rule>\n</ReplicationConfiguration>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await replicationController.bucketReplication1(
-    replication,
-    contentMD5,
-    xAmzBucketObjectLockToken,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+replicationController.bucketReplication1Async(replication, contentMD5, xAmzBucketObjectLockToken, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -139,45 +111,36 @@ try {
 
 Deletes the replication configuration from the bucket.
 
-```ts
-async deleteBucketReplication(
-  replication: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> deleteBucketReplicationAsync(
+    final String replication,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `replication` | `string` | Query, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `replication` | `String` | Query, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const replication = 'replication0';
+```java
+String replication = "replication0";
+String bucket = "bucket2";
 
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await replicationController.deleteBucketReplication(
-    replication,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+replicationController.deleteBucketReplicationAsync(replication, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

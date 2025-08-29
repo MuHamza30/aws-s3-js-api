@@ -7,10 +7,10 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `owner` | [`Owner`](../../doc/models/owner.md) | Required | - |
-| `accessControlList` | [`AccessControlList`](../../doc/models/access-control-list.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Owner` | [`Owner`](../../doc/models/owner.md) | Required | - | Owner getOwner() | setOwner(Owner owner) |
+| `AccessControlList` | [`AccessControlList`](../../doc/models/access-control-list.md) | Required | - | AccessControlList getAccessControlList() | setAccessControlList(AccessControlList accessControlList) |
 
 ## Example (as XML)
 

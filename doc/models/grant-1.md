@@ -7,10 +7,10 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `grantee` | [`Grantee1`](../../doc/models/grantee-1.md) | Required | - |
-| `permission` | `string` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Grantee` | [`Grantee1`](../../doc/models/grantee-1.md) | Required | - | Grantee1 getGrantee() | setGrantee(Grantee1 grantee) |
+| `Permission` | `String` | Required | - | String getPermission() | setPermission(String permission) |
 
 ## Example (as XML)
 

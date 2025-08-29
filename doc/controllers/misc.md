@@ -1,7 +1,7 @@
 # Misc
 
-```ts
-const miscController = new MiscController(client);
+```java
+MiscController miscController = client.getMiscController();
 ```
 
 ## Class Name
@@ -11,38 +11,32 @@ const miscController = new MiscController(client);
 
 # Root
 
-```ts
-async root(
-  xAmzContentSha256: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> rootAsync(
+    final String xAmzContentSha256)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `xAmzContentSha256` | `String` | Header, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
+```java
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
 
-try {
-  const { result, ...httpResponse } = await miscController.root(xAmzContentSha256);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+miscController.rootAsync(xAmzContentSha256).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

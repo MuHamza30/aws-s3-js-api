@@ -1,7 +1,7 @@
 # Inventory
 
-```ts
-const inventoryController = new InventoryController(client);
+```java
+InventoryController inventoryController = client.getInventoryController();
 ```
 
 ## Class Name
@@ -19,51 +19,40 @@ const inventoryController = new InventoryController(client);
 
 Returns an inventory configuration (identified by the inventory configuration ID) from the bucket.
 
-```ts
-async bucketInventoryConfiguration(
-  inventory: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> bucketInventoryConfigurationAsync(
+    final String inventory,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `inventory` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `inventory` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const inventory = 'inventory4';
+```java
+String inventory = "inventory4";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await inventoryController.bucketInventoryConfiguration(
-    inventory,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+inventoryController.bucketInventoryConfigurationAsync(inventory, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response
@@ -77,51 +66,39 @@ try {
 
 Deletes an inventory configuration (identified by the inventory ID) from the bucket.
 
-```ts
-async deleteBucketInventoryConfiguration(
-  inventory: string,
-  id: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> deleteBucketInventoryConfigurationAsync(
+    final String inventory,
+    final String id,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `inventory` | `string` | Query, Required | - |
-| `id` | `string` | Query, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `inventory` | `String` | Query, Required | - |
+| `id` | `String` | Query, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const inventory = 'inventory4';
+```java
+String inventory = "inventory4";
+String id = "test-inventory";
+String bucket = "bucket2";
 
-const id = 'test-inventory';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await inventoryController.deleteBucketInventoryConfiguration(
-    inventory,
-    id,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+inventoryController.deleteBucketInventoryConfigurationAsync(inventory, id, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -129,55 +106,41 @@ try {
 
 This implementation of the PUT operation adds an inventory configuration (identified by the inventory ID) to the bucket. You can have up to 1,000 inventory configurations per bucket.
 
-```ts
-async bucketInventoryConfiguration1(
-  inventory: string,
-  id: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketInventoryConfiguration1Async(
+    final String inventory,
+    final String id,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `inventory` | `string` | Query, Required | - |
-| `id` | `string` | Query, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `inventory` | `String` | Query, Required | - |
+| `id` | `String` | Query, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const inventory = 'inventory4';
+```java
+String inventory = "inventory4";
+String id = "{{Id}}";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<InventoryConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Destination>\n      <S3BucketDestination>\n         <AccountId>string</AccountId>\n         <Bucket>string</Bucket>\n         <Encryption>\n            <SSE-KMS>\n               <KeyId>string</KeyId>\n            </SSE-KMS>\n            <SSE-S3>\n            </SSE-S3>\n         </Encryption>\n         <Format>string</Format>\n         <Prefix>string</Prefix>\n      </S3BucketDestination>\n   </Destination>\n   <IsEnabled>boolean</IsEnabled>\n   <Filter>\n      <Prefix>string</Prefix>\n   </Filter>\n   <Id>test-inventory</Id>\n   <IncludedObjectVersions>string</IncludedObjectVersions>\n   <OptionalFields>\n      <Field>string</Field>\n   </OptionalFields>\n   <Schedule>\n      <Frequency>string</Frequency>\n   </Schedule>\n</InventoryConfiguration>";
+String bucket = "bucket2";
 
-const id = '{{Id}}';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<InventoryConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Destination>\n      <S3BucketDestination>\n         <AccountId>string</AccountId>\n         <Bucket>string</Bucket>\n         <Encryption>\n            <SSE-KMS>\n               <KeyId>string</KeyId>\n            </SSE-KMS>\n            <SSE-S3>\n            </SSE-S3>\n         </Encryption>\n         <Format>string</Format>\n         <Prefix>string</Prefix>\n      </S3BucketDestination>\n   </Destination>\n   <IsEnabled>boolean</IsEnabled>\n   <Filter>\n      <Prefix>string</Prefix>\n   </Filter>\n   <Id>test-inventory</Id>\n   <IncludedObjectVersions>string</IncludedObjectVersions>\n   <OptionalFields>\n      <Field>string</Field>\n   </OptionalFields>\n   <Schedule>\n      <Frequency>string</Frequency>\n   </Schedule>\n</InventoryConfiguration>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await inventoryController.bucketInventoryConfiguration1(
-    inventory,
-    id,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+inventoryController.bucketInventoryConfiguration1Async(inventory, id, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

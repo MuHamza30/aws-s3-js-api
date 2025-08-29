@@ -7,9 +7,9 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `bucket` | [`Bucket`](../../doc/models/bucket.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Bucket` | [`Bucket`](../../doc/models/bucket.md) | Required | - | Bucket getBucket() | setBucket(Bucket bucket) |
 
 ## Example (as XML)
 

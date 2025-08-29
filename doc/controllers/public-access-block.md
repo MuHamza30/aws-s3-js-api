@@ -1,7 +1,7 @@
 # Public Access Block
 
-```ts
-const publicAccessBlockController = new PublicAccessBlockController(client);
+```java
+PublicAccessBlockController publicAccessBlockController = client.getPublicAccessBlockController();
 ```
 
 ## Class Name
@@ -19,46 +19,36 @@ const publicAccessBlockController = new PublicAccessBlockController(client);
 
 Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket. In order to use this operation, you must have the s3:GetBucketPublicAccessBlock permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.
 
-```ts
-async publicAccessBlock(
-  publicAccessBlock: string,
-  xAmzContentSha256: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> publicAccessBlockAsync(
+    final String publicAccessBlock,
+    final String xAmzContentSha256)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `publicAccessBlock` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `publicAccessBlock` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const publicAccessBlock = 'publicAccessBlock0';
+```java
+String publicAccessBlock = "publicAccessBlock0";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-try {
-  const { result, ...httpResponse } = await publicAccessBlockController.publicAccessBlock(
-    publicAccessBlock,
-    xAmzContentSha256
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+publicAccessBlockController.publicAccessBlockAsync(publicAccessBlock, xAmzContentSha256).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -66,46 +56,36 @@ try {
 
 Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket. In order to use this operation, you must have the s3:GetBucketPublicAccessBlock permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.
 
-```ts
-async publicAccessBlock1(
-  publicAccessBlock: string,
-  xAmzContentSha256: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> publicAccessBlock1Async(
+    final String publicAccessBlock,
+    final String xAmzContentSha256)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `publicAccessBlock` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `publicAccessBlock` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const publicAccessBlock = 'publicAccessBlock0';
+```java
+String publicAccessBlock = "publicAccessBlock0";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-try {
-  const { result, ...httpResponse } = await publicAccessBlockController.publicAccessBlock1(
-    publicAccessBlock,
-    xAmzContentSha256
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+publicAccessBlockController.publicAccessBlock1Async(publicAccessBlock, xAmzContentSha256).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -113,50 +93,38 @@ try {
 
 Removes the PublicAccessBlock configuration for an Amazon S3 bucket. In order to use this operation, you must have the s3:PutBucketPublicAccessBlock permission.
 
-```ts
-async publicAccessBlock2(
-  publicAccessBlock: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> publicAccessBlock2Async(
+    final String publicAccessBlock,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `publicAccessBlock` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `publicAccessBlock` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const publicAccessBlock = 'publicAccessBlock0';
+```java
+String publicAccessBlock = "publicAccessBlock0";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await publicAccessBlockController.publicAccessBlock2(
-    publicAccessBlock,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+publicAccessBlockController.publicAccessBlock2Async(publicAccessBlock, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

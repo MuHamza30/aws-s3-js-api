@@ -1,7 +1,7 @@
 # Payments
 
-```ts
-const paymentsController = new PaymentsController(client);
+```java
+PaymentsController paymentsController = client.getPaymentsController();
 ```
 
 ## Class Name
@@ -18,51 +18,40 @@ const paymentsController = new PaymentsController(client);
 
 Returns the request payment configuration of a bucket. To use this version of the operation, you must be the bucket owner. For more information, see Requester Pays Buckets.
 
-```ts
-async bucketRequestPayment(
-  requestPayment: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> bucketRequestPaymentAsync(
+    final String requestPayment,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `requestPayment` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `requestPayment` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const requestPayment = 'requestPayment4';
+```java
+String requestPayment = "requestPayment4";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await paymentsController.bucketRequestPayment(
-    requestPayment,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+paymentsController.bucketRequestPaymentAsync(requestPayment, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response
@@ -76,50 +65,39 @@ try {
 
 Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download.
 
-```ts
-async bucketRequestPayment1(
-  requestPayment: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> bucketRequestPayment1Async(
+    final String requestPayment,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `requestPayment` | `string` | Query, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `requestPayment` | `String` | Query, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const requestPayment = 'requestPayment4';
+```java
+String requestPayment = "requestPayment4";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<RequestPaymentConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Payer>Requester</Payer>\n</RequestPaymentConfiguration>";
+String bucket = "bucket2";
 
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<RequestPaymentConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Payer>Requester</Payer>\n</RequestPaymentConfiguration>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await paymentsController.bucketRequestPayment1(
-    requestPayment,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+paymentsController.bucketRequestPayment1Async(requestPayment, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

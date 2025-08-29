@@ -7,15 +7,15 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `bucket` | `string` | Required | - |
-| `keyMarker` | `string` | Required | - |
-| `uploadIdMarker` | `string` | Required | - |
-| `nextKeyMarker` | `string` | Required | - |
-| `nextUploadIdMarker` | `string` | Required | - |
-| `maxUploads` | `number` | Required | - |
-| `isTruncated` | `boolean` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Bucket` | `String` | Required | - | String getBucket() | setBucket(String bucket) |
+| `KeyMarker` | `String` | Required | - | String getKeyMarker() | setKeyMarker(String keyMarker) |
+| `UploadIdMarker` | `String` | Required | - | String getUploadIdMarker() | setUploadIdMarker(String uploadIdMarker) |
+| `NextKeyMarker` | `String` | Required | - | String getNextKeyMarker() | setNextKeyMarker(String nextKeyMarker) |
+| `NextUploadIdMarker` | `String` | Required | - | String getNextUploadIdMarker() | setNextUploadIdMarker(String nextUploadIdMarker) |
+| `MaxUploads` | `int` | Required | - | int getMaxUploads() | setMaxUploads(int maxUploads) |
+| `IsTruncated` | `boolean` | Required | - | boolean getIsTruncated() | setIsTruncated(boolean isTruncated) |
 
 ## Example (as XML)
 

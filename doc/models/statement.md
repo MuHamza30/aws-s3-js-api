@@ -7,14 +7,14 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `sid` | `string` | Required | - |
-| `effect` | `string` | Required | - |
-| `principal` | [`Principal`](../../doc/models/principal.md) | Required | - |
-| `action` | `string` | Required | - |
-| `resource` | `string` | Required | - |
-| `condition` | [`Condition`](../../doc/models/condition.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Sid` | `String` | Required | - | String getSid() | setSid(String sid) |
+| `Effect` | `String` | Required | - | String getEffect() | setEffect(String effect) |
+| `Principal` | [`Principal`](../../doc/models/principal.md) | Required | - | Principal getPrincipal() | setPrincipal(Principal principal) |
+| `Action` | `String` | Required | - | String getAction() | setAction(String action) |
+| `Resource` | `String` | Required | - | String getResource() | setResource(String resource) |
+| `Condition` | [`Condition`](../../doc/models/condition.md) | Required | - | Condition getCondition() | setCondition(Condition condition) |
 
 ## Example (as JSON)
 

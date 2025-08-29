@@ -7,14 +7,14 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `name` | `string` | Required | - |
-| `prefix` | `string` | Required | - |
-| `marker` | `string` | Required | - |
-| `maxKeys` | `number` | Required | - |
-| `isTruncated` | `boolean` | Required | - |
-| `contents` | [`Contents[]`](../../doc/models/contents.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Name` | `String` | Required | - | String getName() | setName(String name) |
+| `Prefix` | `String` | Required | - | String getPrefix() | setPrefix(String prefix) |
+| `Marker` | `String` | Required | - | String getMarker() | setMarker(String marker) |
+| `MaxKeys` | `int` | Required | - | int getMaxKeys() | setMaxKeys(int maxKeys) |
+| `IsTruncated` | `boolean` | Required | - | boolean getIsTruncated() | setIsTruncated(boolean isTruncated) |
+| `Contents` | [`List<Contents>`](../../doc/models/contents.md) | Required | - | List<Contents> getContents() | setContents(List<Contents> contents) |
 
 ## Example (as XML)
 

@@ -1,7 +1,7 @@
 # Analytics
 
-```ts
-const analyticsController = new AnalyticsController(client);
+```java
+AnalyticsController analyticsController = client.getAnalyticsController();
 ```
 
 ## Class Name
@@ -20,51 +20,40 @@ const analyticsController = new AnalyticsController(client);
 
 This implementation of the GET operation returns an analytics configuration (identified by the analytics configuration ID) from the bucket.
 
-```ts
-async bucketAnalytics(
-  analytics: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> bucketAnalyticsAsync(
+    final String analytics,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `analytics` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `analytics` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const analytics = 'analytics2';
+```java
+String analytics = "analytics2";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await analyticsController.bucketAnalytics(
-    analytics,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+analyticsController.bucketAnalyticsAsync(analytics, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response
@@ -78,56 +67,43 @@ try {
 
 Lists the analytics configurations for the bucket. You can have up to 1,000 analytics configurations per bucket.
 
-```ts
-async bucketAnalyticsConfigurations(
-  analytics: string,
-  id: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> bucketAnalyticsConfigurationsAsync(
+    final String analytics,
+    final String id,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `analytics` | `string` | Query, Required | - |
-| `id` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `analytics` | `String` | Query, Required | - |
+| `id` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const analytics = 'analytics2';
+```java
+String analytics = "analytics2";
+String id = "test";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const id = 'test';
-
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await analyticsController.bucketAnalyticsConfigurations(
-    analytics,
-    id,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+analyticsController.bucketAnalyticsConfigurationsAsync(analytics, id, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response
@@ -141,56 +117,42 @@ try {
 
 Sets an analytics configuration for the bucket (specified by the analytics configuration ID). You can have up to 1,000 analytics configurations per bucket.
 
-```ts
-async bucketAnalyticsConfigurations1(
-  analytics: string,
-  id: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketAnalyticsConfigurations1Async(
+    final String analytics,
+    final String id,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `analytics` | `string` | Query, Required | - |
-| `id` | `string` | Query, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `analytics` | `String` | Query, Required | - |
+| `id` | `String` | Query, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const analytics = 'analytics2';
+```java
+String analytics = "analytics2";
+String id = "test2";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AnalyticsConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Id>test</Id>\n   <Filter>\n      <And>\n         <Prefix>test/</Prefix>\n         <Tag>\n            <Key>string</Key>\n            <Value>string</Value>\n         </Tag>\n      </And>\n      <Prefix>string</Prefix>\n      <Tag>\n         <Key>string</Key>\n         <Value>string</Value>\n      </Tag>\n   </Filter>\n   <StorageClassAnalysis>\n      <DataExport>\n         <Destination>\n            <S3BucketDestination>\n               <Bucket>arn:aws:s3:::working-demo-2</Bucket>\n               <Format>CSV</Format>\n               <Prefix>destination-prefix</Prefix>\n            </S3BucketDestination>\n         </Destination>\n         <OutputSchemaVersion>string</OutputSchemaVersion>\n      </DataExport>\n   </StorageClassAnalysis>\n</AnalyticsConfiguration>";
+String bucket = "bucket2";
 
-const id = 'test2';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<AnalyticsConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Id>test</Id>\n   <Filter>\n      <And>\n         <Prefix>test/</Prefix>\n         <Tag>\n            <Key>string</Key>\n            <Value>string</Value>\n         </Tag>\n      </And>\n      <Prefix>string</Prefix>\n      <Tag>\n         <Key>string</Key>\n         <Value>string</Value>\n      </Tag>\n   </Filter>\n   <StorageClassAnalysis>\n      <DataExport>\n         <Destination>\n            <S3BucketDestination>\n               <Bucket>arn:aws:s3:::working-demo-2</Bucket>\n               <Format>CSV</Format>\n               <Prefix>destination-prefix</Prefix>\n            </S3BucketDestination>\n         </Destination>\n         <OutputSchemaVersion>string</OutputSchemaVersion>\n      </DataExport>\n   </StorageClassAnalysis>\n</AnalyticsConfiguration>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await analyticsController.bucketAnalyticsConfigurations1(
-    analytics,
-    id,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+analyticsController.bucketAnalyticsConfigurations1Async(analytics, id, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -198,55 +160,42 @@ try {
 
 Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
 
-```ts
-async deleteBucketAnalyticsConfiguration(
-  analytics: string,
-  id: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> deleteBucketAnalyticsConfigurationAsync(
+    final String analytics,
+    final String id,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `analytics` | `string` | Query, Required | - |
-| `id` | `string` | Query, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `analytics` | `String` | Query, Required | - |
+| `id` | `String` | Query, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const analytics = 'analytics2';
+```java
+String analytics = "analytics2";
+String id = "test";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateBucketConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <LocationConstraint>us-west-1</LocationConstraint>\n</CreateBucketConfiguration>";
+String bucket = "bucket2";
 
-const id = 'test';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <LocationConstraint>us-west-1</LocationConstraint>\n</CreateBucketConfiguration>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await analyticsController.deleteBucketAnalyticsConfiguration(
-    analytics,
-    id,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+analyticsController.deleteBucketAnalyticsConfigurationAsync(analytics, id, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

@@ -7,10 +7,10 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `stringEquals` | [`StringEquals`](../../doc/models/string-equals.md) | Required | - |
-| `arnLike` | [`ArnLike`](../../doc/models/arn-like.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `StringEquals` | [`StringEquals`](../../doc/models/string-equals.md) | Required | - | StringEquals getStringEquals() | setStringEquals(StringEquals stringEquals) |
+| `ArnLike` | [`ArnLike`](../../doc/models/arn-like.md) | Required | - | ArnLike getArnLike() | setArnLike(ArnLike arnLike) |
 
 ## Example (as JSON)
 

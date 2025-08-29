@@ -7,10 +7,10 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `awsSourceAccount` | `string` | Required | - |
-| `s3XAmzAcl` | `string` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `AwsSourceAccount` | `String` | Required | - | String getAwsSourceAccount() | setAwsSourceAccount(String awsSourceAccount) |
+| `S3XAmzAcl` | `String` | Required | - | String getS3XAmzAcl() | setS3XAmzAcl(String s3XAmzAcl) |
 
 ## Example (as JSON)
 

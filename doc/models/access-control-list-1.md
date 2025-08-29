@@ -7,9 +7,9 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `grant` | [`Grant1`](../../doc/models/grant-1.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Grant` | [`Grant1`](../../doc/models/grant-1.md) | Required | - | Grant1 getGrant() | setGrant(Grant1 grant) |
 
 ## Example (as XML)
 

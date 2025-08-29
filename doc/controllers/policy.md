@@ -1,7 +1,7 @@
 # Policy
 
-```ts
-const policyController = new PolicyController(client);
+```java
+PolicyController policyController = client.getPolicyController();
 ```
 
 ## Class Name
@@ -20,51 +20,40 @@ const policyController = new PolicyController(client);
 
 Returns the policy of a specified bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the GetBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this operation.
 
-```ts
-async bucketPolicy(
-  policy: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<BucketPolicy>>
+```java
+CompletableFuture<BucketPolicy> bucketPolicyAsync(
+    final String policy,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `policy` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `policy` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BucketPolicy`](../../doc/models/bucket-policy.md).
+[`BucketPolicy`](../../doc/models/bucket-policy.md)
 
 ## Example Usage
 
-```ts
-const policy = 'policy4';
+```java
+String policy = "policy4";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await policyController.bucketPolicy(
-    policy,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+policyController.bucketPolicyAsync(policy, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response *(as JSON)*
@@ -101,84 +90,76 @@ try {
 
 Applies an Amazon S3 bucket policy to an Amazon S3 bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the PutBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this operation.
 
-```ts
-async bucketPolicy1(
-  policy: string,
-  contentMD5: string,
-  xAmzConfirmRemoveSelfBucketAccess: string,
-  body: BucketPolicyRequest,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> bucketPolicy1Async(
+    final String policy,
+    final String contentMD5,
+    final String xAmzConfirmRemoveSelfBucketAccess,
+    final BucketPolicyRequest body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `policy` | `string` | Query, Required | - |
-| `contentMD5` | `string` | Header, Required | - |
-| `xAmzConfirmRemoveSelfBucketAccess` | `string` | Header, Required | - |
+| `policy` | `String` | Query, Required | - |
+| `contentMD5` | `String` | Header, Required | - |
+| `xAmzConfirmRemoveSelfBucketAccess` | `String` | Header, Required | - |
 | `body` | [`BucketPolicyRequest`](../../doc/models/bucket-policy-request.md) | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const policy = 'policy4';
+```java
+String policy = "policy4";
+String contentMD5 = "{{contentMD5}}";
+String xAmzConfirmRemoveSelfBucketAccess = "ConfirmRemoveSelfBucketAccess";
+BucketPolicyRequest body = new BucketPolicyRequest.Builder(
+    "2012-10-17",
+    "S3-Console-Auto-Gen-Policy-1573968487385",
+    Arrays.asList(
+        new Statement.Builder(
+            "S3PolicyStmt-DO-NOT-MODIFY-1573968487385",
+            "Allow",
+            new Principal.Builder(
+                "s3.amazonaws.com"
+            )
+            .build(),
+            "s3:PutObject",
+            "arn:aws:s3:::working-demo-2/*",
+            new Condition.Builder(
+                new StringEquals.Builder(
+                    "879370021840",
+                    "bucket-owner-full-control"
+                )
+                .build(),
+                new ArnLike.Builder(
+                    "arn:aws:s3:::working-demo-2"
+                )
+                .build()
+            )
+            .build()
+        )
+        .build()
+    )
+)
+.build();
 
-const contentMD5 = '{{contentMD5}}';
+String bucket = "bucket2";
 
-const xAmzConfirmRemoveSelfBucketAccess = 'ConfirmRemoveSelfBucketAccess';
-
-const body: BucketPolicyRequest = {
-  version: '2012-10-17',
-  id: 'S3-Console-Auto-Gen-Policy-1573968487385',
-  statement: [
-    {
-      sid: 'S3PolicyStmt-DO-NOT-MODIFY-1573968487385',
-      effect: 'Allow',
-      principal: {
-        service: 's3.amazonaws.com',
-      },
-      action: 's3:PutObject',
-      resource: 'arn:aws:s3:::working-demo-2/*',
-      condition: {
-        stringEquals: {
-          awsSourceAccount: '879370021840',
-          s3XAmzAcl: 'bucket-owner-full-control',
-        },
-        arnLike: {
-          awsSourceArn: 'arn:aws:s3:::working-demo-2',
-        },
-      },
-    }
-  ],
-};
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await policyController.bucketPolicy1(
-    policy,
-    contentMD5,
-    xAmzConfirmRemoveSelfBucketAccess,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+policyController.bucketPolicy1Async(policy, contentMD5, xAmzConfirmRemoveSelfBucketAccess, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -186,51 +167,40 @@ try {
 
 Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public. In order to use this operation, you must have the s3:GetBucketPolicyStatus permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.
 
-```ts
-async bucketPolicyStatus(
-  policyStatus: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> bucketPolicyStatusAsync(
+    final String policyStatus,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `policyStatus` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `policyStatus` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const policyStatus = 'policyStatus6';
+```java
+String policyStatus = "policyStatus6";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await policyController.bucketPolicyStatus(
-    policyStatus,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+policyController.bucketPolicyStatusAsync(policyStatus, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response
@@ -244,45 +214,36 @@ try {
 
 This implementation of the DELETE operation uses the policysubresource to delete the policy of a specified bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the DeleteBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this operation.
 
-```ts
-async deleteBucketPolicy(
-  policy: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> deleteBucketPolicyAsync(
+    final String policy,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `policy` | `string` | Query, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `policy` | `String` | Query, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const policy = 'policy4';
+```java
+String policy = "policy4";
+String bucket = "bucket2";
 
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await policyController.deleteBucketPolicy(
-    policy,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+policyController.deleteBucketPolicyAsync(policy, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

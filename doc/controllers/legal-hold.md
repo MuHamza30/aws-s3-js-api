@@ -1,7 +1,7 @@
 # Legal Hold
 
-```ts
-const legalHoldController = new LegalHoldController(client);
+```java
+LegalHoldController legalHoldController = client.getLegalHoldController();
 ```
 
 ## Class Name
@@ -18,56 +18,42 @@ const legalHoldController = new LegalHoldController(client);
 
 Gets an object's current Legal Hold status. For more information, see Locking Objects.
 
-```ts
-async legalHold(
-  legalHold: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> legalHoldAsync(
+    final String legalHold,
+    final String xAmzContentSha256,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `legalHold` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `legalHold` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const legalHold = 'legal-hold2';
+```java
+String legalHold = "legal-hold2";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await legalHoldController.legalHold(
-    legalHold,
-    xAmzContentSha256,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+legalHoldController.legalHoldAsync(legalHold, xAmzContentSha256, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -75,60 +61,44 @@ try {
 
 Gets an object's current Legal Hold status. For more information, see Locking Objects.
 
-```ts
-async legalHold1(
-  legalHold: string,
-  contentMD5: string,
-  body: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> legalHold1Async(
+    final String legalHold,
+    final String contentMD5,
+    final String body,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `legalHold` | `string` | Query, Required | - |
-| `contentMD5` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `legalHold` | `String` | Query, Required | - |
+| `contentMD5` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const legalHold = 'legal-hold2';
+```java
+String legalHold = "legal-hold2";
+String contentMD5 = "{{contentMD5}}";
+String body = "<LegalHold xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Status>ON</Status>\n</LegalHold>";
+String bucket = "bucket2";
+String key = "key0";
 
-const contentMD5 = '{{contentMD5}}';
-
-const body = '<LegalHold xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Status>ON</Status>\n</LegalHold>';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await legalHoldController.legalHold1(
-    legalHold,
-    contentMD5,
-    body,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+legalHoldController.legalHold1Async(legalHold, contentMD5, body, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

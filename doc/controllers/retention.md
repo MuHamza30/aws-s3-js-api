@@ -1,7 +1,7 @@
 # Retention
 
-```ts
-const retentionController = new RetentionController(client);
+```java
+RetentionController retentionController = client.getRetentionController();
 ```
 
 ## Class Name
@@ -18,56 +18,42 @@ const retentionController = new RetentionController(client);
 
 Retrieves an object's retention settings. For more information, see Locking Objects.
 
-```ts
-async retention(
-  retention: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> retentionAsync(
+    final String retention,
+    final String xAmzContentSha256,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `retention` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `retention` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const retention = 'retention2';
+```java
+String retention = "retention2";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await retentionController.retention(
-    retention,
-    xAmzContentSha256,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+retentionController.retentionAsync(retention, xAmzContentSha256, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -75,55 +61,41 @@ try {
 
 Retrieves an object's retention settings. For more information, see Locking Objects.
 
-```ts
-async retention1(
-  retention: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> retention1Async(
+    final String retention,
+    final String xAmzContentSha256,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `retention` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `retention` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const retention = 'retention2';
+```java
+String retention = "retention2";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await retentionController.retention1(
-    retention,
-    xAmzContentSha256,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+retentionController.retention1Async(retention, xAmzContentSha256, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

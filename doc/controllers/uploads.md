@@ -1,7 +1,7 @@
 # Uploads
 
-```ts
-const uploadsController = new UploadsController(client);
+```java
+UploadsController uploadsController = client.getUploadsController();
 ```
 
 ## Class Name
@@ -22,61 +22,45 @@ const uploadsController = new UploadsController(client);
 
 This operation initiates a multipart upload and returns an upload ID. This upload ID is used to associate all of the parts in the specific multipart upload. You specify this upload ID in each of your subsequent upload part requests (see UploadPart). You also include this upload ID in the final request to either complete or abort the multipart upload request.
 
-```ts
-async createMultipart(
-  uploads: string,
-  xAmzContentSha256: string,
-  file: FileWrapper,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> createMultipartAsync(
+    final String uploads,
+    final String xAmzContentSha256,
+    final FileWrapper file,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uploads` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
+| `uploads` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
 | `file` | `FileWrapper` | Form, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const uploads = 'uploads2';
+```java
+String uploads = "uploads2";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+FileWrapper file = new FileWrapper(new File("dummy_file"), "optional-content-type");
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const file = new FileWrapper(fs.createReadStream('dummy_file'));
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await uploadsController.createMultipart(
-    uploads,
-    xAmzContentSha256,
-    file,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+uploadsController.createMultipartAsync(uploads, xAmzContentSha256, file, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -84,81 +68,58 @@ try {
 
 This operation lists in-progress multipart uploads. An in-progress multipart upload is a multipart upload that has been initiated using the Initiate Multipart Upload request, but has not yet been completed or aborted.
 
-```ts
-async multipart(
-  uploads: string,
-  delimiter: string,
-  encodingType: string,
-  keyMarker: string,
-  maxUploads: string,
-  prefix: string,
-  uploadIdMarker: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListMultipartUploadsResult>>
+```java
+CompletableFuture<ListMultipartUploadsResult> multipartAsync(
+    final String uploads,
+    final String delimiter,
+    final String encodingType,
+    final String keyMarker,
+    final String maxUploads,
+    final String prefix,
+    final String uploadIdMarker,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uploads` | `string` | Query, Required | - |
-| `delimiter` | `string` | Query, Required | - |
-| `encodingType` | `string` | Query, Required | - |
-| `keyMarker` | `string` | Query, Required | - |
-| `maxUploads` | `string` | Query, Required | - |
-| `prefix` | `string` | Query, Required | - |
-| `uploadIdMarker` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `uploads` | `String` | Query, Required | - |
+| `delimiter` | `String` | Query, Required | - |
+| `encodingType` | `String` | Query, Required | - |
+| `keyMarker` | `String` | Query, Required | - |
+| `maxUploads` | `String` | Query, Required | - |
+| `prefix` | `String` | Query, Required | - |
+| `uploadIdMarker` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListMultipartUploadsResult`](../../doc/models/list-multipart-uploads-result.md).
+[`ListMultipartUploadsResult`](../../doc/models/list-multipart-uploads-result.md)
 
 ## Example Usage
 
-```ts
-const uploads = 'uploads2';
+```java
+String uploads = "uploads2";
+String delimiter = "{{Delimiter}}";
+String encodingType = "{{EncodingType}}";
+String keyMarker = "{{KeyMarker}}";
+String maxUploads = "{{MaxUploads}}";
+String prefix = "{{Prefix}}";
+String uploadIdMarker = "{{UploadIdMarker}}";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const delimiter = '{{Delimiter}}';
-
-const encodingType = '{{EncodingType}}';
-
-const keyMarker = '{{KeyMarker}}';
-
-const maxUploads = '{{MaxUploads}}';
-
-const prefix = '{{Prefix}}';
-
-const uploadIdMarker = '{{UploadIdMarker}}';
-
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await uploadsController.multipart(
-    uploads,
-    delimiter,
-    encodingType,
-    keyMarker,
-    maxUploads,
-    prefix,
-    uploadIdMarker,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+uploadsController.multipartAsync(uploads, delimiter, encodingType, keyMarker, maxUploads, prefix, uploadIdMarker, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response *(as XML)*
@@ -180,61 +141,45 @@ try {
 
 Completes a multipart upload by assembling previously uploaded parts.
 
-```ts
-async completeMultipart(
-  uploadId: string,
-  xAmzContentSha256: string,
-  body: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> completeMultipartAsync(
+    final String uploadId,
+    final String xAmzContentSha256,
+    final String body,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uploadId` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `uploadId` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const uploadId = 'UploadId';
+```java
+String uploadId = "UploadId";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompleteMultipartUpload xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await uploadsController.completeMultipart(
-    uploadId,
-    xAmzContentSha256,
-    body,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+uploadsController.completeMultipartAsync(uploadId, xAmzContentSha256, body, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -242,61 +187,45 @@ try {
 
 Completes a multipart upload by assembling previously uploaded parts.
 
-```ts
-async part(
-  uploadId: string,
-  xAmzContentSha256: string,
-  body: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> partAsync(
+    final String uploadId,
+    final String xAmzContentSha256,
+    final String body,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uploadId` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `uploadId` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const uploadId = '{{uploadId}}';
+```java
+String uploadId = "{{uploadId}}";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompleteMultipartUpload xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await uploadsController.part(
-    uploadId,
-    xAmzContentSha256,
-    body,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+uploadsController.partAsync(uploadId, xAmzContentSha256, body, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -304,66 +233,48 @@ try {
 
 Completes a multipart upload by assembling previously uploaded parts.
 
-```ts
-async partCopy(
-  uploadId: string,
-  partNumber: string,
-  xAmzContentSha256: string,
-  body: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> partCopyAsync(
+    final String uploadId,
+    final String partNumber,
+    final String xAmzContentSha256,
+    final String body,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uploadId` | `string` | Query, Required | - |
-| `partNumber` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `uploadId` | `String` | Query, Required | - |
+| `partNumber` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const uploadId = '{{uploadId}}';
+```java
+String uploadId = "{{uploadId}}";
+String partNumber = "{{PartNumber}}";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompleteMultipartUpload xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>";
+String bucket = "bucket2";
+String key = "key0";
 
-const partNumber = '{{PartNumber}}';
-
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await uploadsController.partCopy(
-    uploadId,
-    partNumber,
-    xAmzContentSha256,
-    body,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+uploadsController.partCopyAsync(uploadId, partNumber, xAmzContentSha256, body, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -371,60 +282,44 @@ try {
 
 Completes a multipart upload by assembling previously uploaded parts.
 
-```ts
-async abortMultipart(
-  uploadId: string,
-  xAmzContentSha256: string,
-  body: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> abortMultipartAsync(
+    final String uploadId,
+    final String xAmzContentSha256,
+    final String body,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uploadId` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `uploadId` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const uploadId = '{{uploadId}}';
+```java
+String uploadId = "{{uploadId}}";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompleteMultipartUpload xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <Part>\n      <ETag>string</ETag>\n      <PartNumber>integer</PartNumber>\n   </Part>\n</CompleteMultipartUpload>';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await uploadsController.abortMultipart(
-    uploadId,
-    xAmzContentSha256,
-    body,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+uploadsController.abortMultipartAsync(uploadId, xAmzContentSha256, body, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 

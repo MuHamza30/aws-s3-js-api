@@ -7,10 +7,10 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `iD` | `string` | Required | - |
-| `displayName` | `string` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `ID` | `String` | Required | - | String getID() | setID(String iD) |
+| `DisplayName` | `String` | Required | - | String getDisplayName() | setDisplayName(String displayName) |
 
 ## Example (as XML)
 

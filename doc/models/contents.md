@@ -7,14 +7,14 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `key` | `string` | Required | - |
-| `lastModified` | `string` | Required | - |
-| `eTag` | `string` | Required | - |
-| `size` | `number` | Required | - |
-| `owner` | [`Owner`](../../doc/models/owner.md) | Required | - |
-| `storageClass` | `string` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Key` | `String` | Required | - | String getKey() | setKey(String key) |
+| `LastModified` | `String` | Required | - | String getLastModified() | setLastModified(String lastModified) |
+| `ETag` | `String` | Required | - | String getETag() | setETag(String eTag) |
+| `Size` | `int` | Required | - | int getSize() | setSize(int size) |
+| `Owner` | [`Owner`](../../doc/models/owner.md) | Required | - | Owner getOwner() | setOwner(Owner owner) |
+| `StorageClass` | `String` | Required | - | String getStorageClass() | setStorageClass(String storageClass) |
 
 ## Example (as XML)
 

@@ -7,9 +7,9 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `awsSourceArn` | `string` | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `AwsSourceArn` | `String` | Required | - | String getAwsSourceArn() | setAwsSourceArn(String awsSourceArn) |
 
 ## Example (as JSON)
 

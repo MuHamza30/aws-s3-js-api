@@ -7,10 +7,10 @@
 
 ## Fields
 
-| Name | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `owner` | [`Owner`](../../doc/models/owner.md) | Required | - |
-| `buckets` | [`Buckets`](../../doc/models/buckets.md) | Required | - |
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `Owner` | [`Owner`](../../doc/models/owner.md) | Required | - | Owner getOwner() | setOwner(Owner owner) |
+| `Buckets` | [`Buckets`](../../doc/models/buckets.md) | Required | - | Buckets getBuckets() | setBuckets(Buckets buckets) |
 
 ## Example (as XML)
 

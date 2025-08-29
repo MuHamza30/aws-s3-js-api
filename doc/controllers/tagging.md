@@ -1,7 +1,7 @@
 # Tagging
 
-```ts
-const taggingController = new TaggingController(client);
+```java
+TaggingController taggingController = client.getTaggingController();
 ```
 
 ## Class Name
@@ -22,51 +22,39 @@ const taggingController = new TaggingController(client);
 
 Returns the tag set associated with the bucket.
 
-```ts
-async bucketTagging(
-  tagging: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+```java
+CompletableFuture<Void> bucketTaggingAsync(
+    final String tagging,
+    final String xAmzContentSha256,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `tagging` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `tagging` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+`void`
 
 ## Example Usage
 
-```ts
-const tagging = 'tagging6';
+```java
+String tagging = "tagging6";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await taggingController.bucketTagging(
-    tagging,
-    xAmzContentSha256,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+taggingController.bucketTaggingAsync(tagging, xAmzContentSha256, bucket).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -74,56 +62,43 @@ try {
 
 Sets the tags for a bucket.
 
-```ts
-async bucketTagging1(
-  tagging: string,
-  contentMD5: string,
-  body: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> bucketTagging1Async(
+    final String tagging,
+    final String contentMD5,
+    final String body,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `tagging` | `string` | Query, Required | - |
-| `contentMD5` | `string` | Header, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `tagging` | `String` | Query, Required | - |
+| `contentMD5` | `String` | Header, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const tagging = 'tagging6';
+```java
+String tagging = "tagging6";
+String contentMD5 = "{{contentMD5}}";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Tagging xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <TagSet>\n      <Tag>\n         <Key>Test 123</Key>\n         <Value>Test 123</Value>\n      </Tag>\n   </TagSet>\n</Tagging>";
+String bucket = "bucket2";
 
-const contentMD5 = '{{contentMD5}}';
-
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<Tagging xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <TagSet>\n      <Tag>\n         <Key>Test 123</Key>\n         <Value>Test 123</Value>\n      </Tag>\n   </TagSet>\n</Tagging>';
-
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await taggingController.bucketTagging1(
-    tagging,
-    contentMD5,
-    body,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+taggingController.bucketTagging1Async(tagging, contentMD5, body, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -131,46 +106,37 @@ try {
 
 Deletes the tags from the bucket.
 
-```ts
-async deleteBucketTagging(
-  tagging: string,
-  bucket: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> deleteBucketTaggingAsync(
+    final String tagging,
+    final String bucket)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `tagging` | `string` | Query, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `tagging` | `String` | Query, Required | - |
+| `bucket` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const tagging = 'tagging6';
+```java
+String tagging = "tagging6";
+String bucket = "bucket2";
 
-const bucket = 'bucket2';
-
-try {
-  const { result, ...httpResponse } = await taggingController.deleteBucketTagging(
-    tagging,
-    bucket
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+taggingController.deleteBucketTaggingAsync(tagging, bucket).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -178,56 +144,43 @@ try {
 
 Returns the tag-set of an object. You send the GET request against the tagging subresource associated with the object.
 
-```ts
-async objectTagging(
-  tagging: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+```java
+CompletableFuture<String> objectTaggingAsync(
+    final String tagging,
+    final String xAmzContentSha256,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `tagging` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `tagging` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
+`String`
 
 ## Example Usage
 
-```ts
-const tagging = 'tagging6';
+```java
+String tagging = "tagging6";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await taggingController.objectTagging(
-    tagging,
-    xAmzContentSha256,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+taggingController.objectTaggingAsync(tagging, xAmzContentSha256, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 ## Example Response
@@ -241,56 +194,43 @@ try {
 
 Returns the tag-set of an object. You send the GET request against the tagging subresource associated with the object.
 
-```ts
-async tagging(
-  tagging: string,
-  body: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> taggingAsync(
+    final String tagging,
+    final String body,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `tagging` | `string` | Query, Required | - |
-| `body` | `string` | Body, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `tagging` | `String` | Query, Required | - |
+| `body` | `String` | Body, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const tagging = 'tagging6';
+```java
+String tagging = "tagging6";
+String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Tagging xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n   <TagSet>\n      <Tag>\n         <Key>Test</Key>\n         <Value>Test</Value>\n      </Tag>\n   </TagSet>\n</Tagging>";
+String bucket = "bucket2";
+String key = "key0";
 
-const body = '<?xml version="1.0" encoding="UTF-8"?>\n<Tagging xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n   <TagSet>\n      <Tag>\n         <Key>Test</Key>\n         <Value>Test</Value>\n      </Tag>\n   </TagSet>\n</Tagging>';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await taggingController.tagging(
-    tagging,
-    body,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+taggingController.taggingAsync(tagging, body, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
 
@@ -298,55 +238,42 @@ try {
 
 Removes the entire tag set from the specified object. For more information about managing object tags, see Object Tagging.
 
-```ts
-async deleteObjectTagging(
-  tagging: string,
-  xAmzContentSha256: string,
-  bucket: string,
-  key: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
+```java
+CompletableFuture<DynamicResponse> deleteObjectTaggingAsync(
+    final String tagging,
+    final String xAmzContentSha256,
+    final String bucket,
+    final String key)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `tagging` | `string` | Query, Required | - |
-| `xAmzContentSha256` | `string` | Header, Required | - |
-| `bucket` | `string` | Template, Required | - |
-| `key` | `string` | Template, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+| `tagging` | `String` | Query, Required | - |
+| `xAmzContentSha256` | `String` | Header, Required | - |
+| `bucket` | `String` | Template, Required | - |
+| `key` | `String` | Template, Required | - |
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `unknown`.
+`DynamicResponse`
 
 ## Example Usage
 
-```ts
-const tagging = 'tagging6';
+```java
+String tagging = "tagging6";
+String xAmzContentSha256 = "UNSIGNED-PAYLOAD";
+String bucket = "bucket2";
+String key = "key0";
 
-const xAmzContentSha256 = 'UNSIGNED-PAYLOAD';
-
-const bucket = 'bucket2';
-
-const key = 'key0';
-
-try {
-  const { result, ...httpResponse } = await taggingController.deleteObjectTagging(
-    tagging,
-    xAmzContentSha256,
-    bucket,
-    key
-  );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
+taggingController.deleteObjectTaggingAsync(tagging, xAmzContentSha256, bucket, key).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
 ```
 
